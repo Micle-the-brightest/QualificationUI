@@ -1,0 +1,10 @@
+.item{
+    text-decoration: none;
+    color:#348feb;
+    padding: 15px;
+}
+.iconSize{
+    height: 30px;
+    width: 30px;
+    color: #348feb;
+}
