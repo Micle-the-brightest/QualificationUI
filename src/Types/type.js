@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Button } from "react-bootstrap";
 import { Modal } from "react-bootstrap";
+import {Form, Col } from "react-bootstrap";
 
 const AppType = () =>{
   const [Data, setData] = useState([]);//для гет запиту 
@@ -106,6 +107,19 @@ const AppType = () =>{
     GetTypeData();
   },[])
 
+
+  const [validated, setValidated] = useState(false);
+
+  const handleSubmit1 = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    setValidated(true);
+  };
+
   console.log(Data);
     return (
       <div>
@@ -197,15 +211,28 @@ const AppType = () =>{
                     </Modal.Header>
                     <Modal.Body>
                         <div>
-                            <div className='form-group'>
-                                <input type="text" className='form-control' onChange={(e)=> settypeRoom(e.target.value)} placeholder="Введіть назву типу"  />
-                            </div>
-                            <div className='form-group mt-3'>
-                                <input type="text" className='form-control' onChange={(e)=> setprice(e.target.value)} placeholder="Введіть ціну"  />
-                            </div>
-                            
-                            <Button type='submit' className='btn btn-success mt-4'onClick={()=>{handleSubmit()}}> Додати тип</Button>
-
+                            <Form noValidate validated={validated} onSubmit={handleSubmit1}>
+                                    <Form.Group as={Col}  controlId="validationCustom01">
+                                        <Form.Control
+                                            required
+                                            type="text"
+                                            className='form-control  mt-3'
+                                            onChange={(e)=> settypeRoom(e.target.value)}
+                                            placeholder="Введіть назву типу"
+                                        />
+                                    </Form.Group>
+                                    
+                                    <Form.Group as={Col}  mt-3 controlId="validationCustom02">
+                                    <Form.Control
+                                        required
+                                        type="text"
+                                        className='form-control  mt-3'
+                                        onChange={(e)=> setprice(e.target.value)}
+                                        placeholder="Введіть ціну"
+                                    />
+                                    </Form.Group>
+                                <Button type="submit" className='btn btn-success mt-4' onClick={()=>{handleSubmit()}} >Додати тип</Button>
+                            </Form>
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
@@ -228,17 +255,33 @@ const AppType = () =>{
                     </Modal.Header>
                     <Modal.Body>
                         <div>
-                            <div className='form-group'>
-                                <label>Назва типу</label>
-                                <input type="text" className='form-control' onChange={(e)=> settypeRoom(e.target.value)} placeholder="Введіть назву типу" defaultValue={RowData.typeRoom}  />
-                            </div>
-                            <div className='form-group mt-3'>  
-                                <label>Ціна</label>
-                                <input type="text" className='form-control' onChange={(e)=> setprice(e.target.value)} placeholder="Введіть ціну" defaultValue={RowData.price} />
-                            </div>
-                           
+                            <Form noValidate validated={validated} onSubmit={handleSubmit1}>
+                                    <Form.Group as={Col}  controlId="validationCustom01">
+                                    <Form.Label>Назва типу</Form.Label>
+                                        <Form.Control
+                                            required
+                                            type="text"
+                                            className='form-control'
+                                            onChange={(e)=> settypeRoom(e.target.value)}
+                                            defaultValue={RowData.typeRoom}
+                                            placeholder="Введіть назву типу"
+                                        />
+                                    </Form.Group>
+                                    
+                                    <Form.Group as={Col}  mt-3 controlId="validationCustom02">
+                                    <Form.Label>Ціна</Form.Label>
+                                    <Form.Control
+                                        required
+                                        type="text"
+                                        className='form-control'
+                                        onChange={(e)=> setprice(e.target.value)}
+                                        defaultValue={RowData.price}
+                                        placeholder="Введіть ціну"
+                                    />
+                                    </Form.Group>
+                                <Button type="submit" className='btn btn-warning mt-4' onClick={()=>{handleEdit()}} >Редагувати</Button>
+                            </Form>
                             
-                            <Button type='submit' className='btn btn-warning mt-4'onClick={()=>{handleEdit()}}> Редагувати</Button>
 
                         </div>
                     </Modal.Body>

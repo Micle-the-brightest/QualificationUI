@@ -6,11 +6,12 @@ import AppType from './Types/type';
 import AppRoomInfo from './RoomInfo/roomInfo';
 import AppRoomList from './RoomList/roomList';
 
+
+
 function App() {
   return (
     <div>     
         <AppHeader/>             
-        
         <div className="container-my">
         <Routes>
           <Route path="/" element={<AppDormitory/>} />

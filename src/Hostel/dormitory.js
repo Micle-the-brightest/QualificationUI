@@ -3,6 +3,7 @@ import axios from "axios";
 import { Button } from "react-bootstrap";
 import { Modal } from "react-bootstrap";
 import {NavLink} from 'react-router-dom';
+import {Form, Col } from "react-bootstrap";
 
 
 const AppDormitory = () =>{
@@ -109,6 +110,19 @@ const AppDormitory = () =>{
     useEffect(()=>{
         GetDormitoryData();
     },[])
+
+
+  const [validated, setValidated] = useState(false);
+
+  const handleSubmit1 = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    setValidated(true);
+  };
 
     console.log(Data);
     return(
@@ -227,26 +241,77 @@ const AppDormitory = () =>{
                     </Modal.Header>
                     <Modal.Body>
                         <div>
-                            <div className='form-group'>
-                                <input type="text" className='form-control' onChange={(e)=> setbuldingName(e.target.value)} placeholder="Введіть назву гуртожитку"  />
-                            </div>
-                            <div className='form-group mt-3'>
-                                <input type="text" className='form-control' onChange={(e)=> setaddress(e.target.value)} placeholder="Введіть адресу"  />
-                            </div>
-                            <div className='form-group mt-3'>
-                                <input type="text" className='form-control' onChange={(e)=> setpostIndex(e.target.value)} placeholder="Введіть поштовий індекс"   />
-                            </div>
-                            <div className='form-group'>
-                                <input type="text" className='form-control' onChange={(e)=> setroomCount(e.target.value)} placeholder="Введіть кількість кімнат"  />
-                            </div>
-                            <div className='form-group'>
-                                <input type="text" className='form-control' onChange={(e)=> setpersonCount(e.target.value)} placeholder="Введіть проживаючих "  />
-                            </div>
-                            <div className='form-group'>
-                                <input type="text" className='form-control' onChange={(e)=> setfreeBedCount(e.target.value)} placeholder="Введіть кількість вільних місць"  />
-                            </div>
-                            <Button type='submit' className='btn btn-success mt-4'onClick={()=>{handleSubmit()}}> Додати гуртожиток</Button>
+                            <Form noValidate validated={validated} onSubmit={handleSubmit1}>
+                                
+                                    <Form.Group as={Col}  controlId="validationCustom01">
+                                        <Form.Control
+                                            required
+                                            type="text"
+                                            className='form-control  mt-3'
+                                            onChange={(e)=> setbuldingName(e.target.value)}
+                                            placeholder="Введіть назву гуртожитку"
+                                        />
+                                        
+                                    </Form.Group>
+                                    
+                                   
+                                    <Form.Group as={Col}  mt-3 controlId="validationCustom02">
+                                    <Form.Control
+                                        required
+                                        type="text"
+                                        className='form-control  mt-3'
+                                        onChange={(e)=> setaddress(e.target.value)}
+                                        placeholder="Введіть адресу"
+                                    />
+                                    
+                                    </Form.Group>
 
+                                    <Form.Group as={Col}  mt-3 controlId="validationCustom02">
+                                    <Form.Control
+                                        required
+                                        type="number"
+                                        className='form-control  mt-3'
+                                        onChange={(e)=> setpostIndex(e.target.value)}
+                                        placeholder="Введіть поштовий індекс"
+                                    />
+                                    
+                                    </Form.Group>
+
+                                    <Form.Group as={Col}  mt-3 controlId="validationCustom02">
+                                    <Form.Control
+                                        required
+                                        type="number"
+                                        className='form-control  mt-3'
+                                        onChange={(e)=> setroomCount(e.target.value)}
+                                        placeholder="Введіть кількість кімнат"
+                                    />
+                                    
+                                    </Form.Group>
+
+                                    <Form.Group as={Col}  mt-3 controlId="validationCustom02">
+                                    <Form.Control
+                                        required
+                                        type="number"
+                                        className='form-control  mt-3'
+                                        onChange={(e)=> setpersonCount(e.target.value)}
+                                        placeholder="Введіть кількість проживаючих "
+                                    />
+                                    
+                                    </Form.Group>
+                                    
+                                    <Form.Group as={Col}  mt-3 controlId="validationCustom02">
+                                    <Form.Control
+                                        required
+                                        type="number"
+                                        className='form-control  mt-3'
+                                        onChange={(e)=> setfreeBedCount(e.target.value)}
+                                        placeholder="Введіть кількість вільних місць "
+                                    />
+                                    
+                                    </Form.Group>
+
+                                <Button type="submit" className='btn btn-success mt-4' onClick={()=>{handleSubmit()}} >Додати гуртожиток</Button>
+                            </Form>
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
@@ -268,7 +333,84 @@ const AppDormitory = () =>{
                     </Modal.Header>
                     <Modal.Body>
                         <div>
-                            <div className='form-group'>
+                        <Form noValidate validated={validated} onSubmit={handleSubmit1}>
+                                <Form.Group as={Col}  mt-3 controlId="validationCustom01">
+                                    <Form.Label>Назва гуртожитка</Form.Label>
+                                    <Form.Control
+                                        required
+                                        type="text"
+                                        className='form-control  '
+                                        onChange={(e)=> setbuldingName(e.target.value)}
+                                        defaultValue={RowData.buldingName}
+                                        placeholder="Введіть назву гуртожитку"
+                                    />
+                                </Form.Group>
+                                
+                               
+                                <Form.Group as={Col}  mt-3 controlId="validationCustom02">
+                                <Form.Label>Адреса</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="text"
+                                    className='form-control  '
+                                    onChange={(e)=> setaddress(e.target.value)}
+                                    defaultValue={RowData.address}
+                                    placeholder="Введіть адресу"
+                                />
+                                </Form.Group>
+
+                                <Form.Group as={Col}  mt-3 controlId="validationCustom02">
+                                <Form.Label>Поштовий індекс</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="number"
+                                    className='form-control '
+                                    onChange={(e)=> setpostIndex(e.target.value)}
+                                    defaultValue={RowData.postIndex}
+                                    placeholder="Введіть поштовий індекс"
+                                />
+                                </Form.Group>
+
+                                <Form.Group as={Col}  mt-3  controlId="validationCustom02">
+                                <Form.Label>Кількість кімнат</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="number"
+                                    className='form-control '
+                                    onChange={(e)=> setroomCount(e.target.value)}
+                                    defaultValue={RowData.roomCount}
+                                    placeholder="Введіть кількість кімнат"
+                                />
+                                </Form.Group>
+
+                                <Form.Group as={Col}  controlId="validationCustom02">
+                                <Form.Label>Кількість проживаючих</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="number"
+                                    className='form-control '
+                                    onChange={(e)=> setpersonCount(e.target.value)}
+                                    defaultValue={RowData.personCount}
+                                    placeholder="Введіть кількість проживаючих "
+                                />
+                                </Form.Group>
+                                
+                                <Form.Group as={Col}   controlId="validationCustom02">
+                                <Form.Label>Кількість вільних місць</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="number"
+                                    className='form-control '
+                                    onChange={(e)=> setfreeBedCount(e.target.value)}
+                                    defaultValue={RowData.freeBedCount}
+                                    placeholder="Введіть кількість вільних місць "
+                                />
+                                </Form.Group>
+
+                            <Button type="submit" className='btn btn-warning mt-4' onClick={()=>{handleEdit()}} >Редагувати</Button>
+                        </Form>
+
+                            {/* <div className='form-group'>
                                 <label>Назва гуртожитку</label>
                                 <input type="text" className='form-control' onChange={(e)=> setbuldingName(e.target.value)} placeholder="Введіть назву гуртожитку" defaultValue={RowData.buldingName}  />
                             </div>
@@ -278,22 +420,22 @@ const AppDormitory = () =>{
                             </div>
                             <div className='form-group mt-3'>
                                 <label>Поштовий індекс</label>
-                                <input type="text" className='form-control' onChange={(e)=> setpostIndex(e.target.value)} placeholder="Введіть поштовий індекс"  defaultValue={RowData.postIndex} />
+                                <input type="number" className='form-control' onChange={(e)=> setpostIndex(e.target.value)} placeholder="Введіть поштовий індекс"  defaultValue={RowData.postIndex} />
                             </div>
-                            <div className='form-group'>
+                            <div className='form-group mt-3'>
                                 <label>Кількість кімнат</label>
-                                <input type="text" className='form-control' onChange={(e)=> setroomCount(e.target.value)} placeholder="Введіть кількість кімнат" defaultValue={RowData.roomCount} />
+                                <input type="number" className='form-control' onChange={(e)=> setroomCount(e.target.value)} placeholder="Введіть кількість кімнат" defaultValue={RowData.roomCount} />
                             </div>
-                            <div className='form-group'>
+                            <div className='form-group mt-3'>
                                 <label>Кількість заселених</label>
-                                <input type="text" className='form-control' onChange={(e)=> setpersonCount(e.target.value)} placeholder="Введіть проживаючих " defaultValue={RowData.personCount} />
+                                <input type="number" className='form-control' onChange={(e)=> setpersonCount(e.target.value)} placeholder="Введіть проживаючих " defaultValue={RowData.personCount} />
                             </div>
-                            <div className='form-group'>
+                            <div className='form-group mt-3'>
                                 <label>Кількість вільних місць</label>
-                                <input type="text" className='form-control' onChange={(e)=> setfreeBedCount(e.target.value)} placeholder="Введіть кількість вільних місць" defaultValue={RowData.freeBedCount} />
+                                <input type="number" className='form-control' onChange={(e)=> setfreeBedCount(e.target.value)} placeholder="Введіть кількість вільних місць" defaultValue={RowData.freeBedCount} />
                             </div>
                             
-                            <Button type='submit' className='btn btn-warning mt-4'onClick={()=>{handleEdit()}}> Редагувати</Button>
+                            <Button type='submit' className='btn btn-warning mt-4'onClick={()=>{handleEdit()}}> Редагувати</Button> */}
 
                         </div>
                     </Modal.Body>

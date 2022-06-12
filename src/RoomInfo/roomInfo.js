@@ -5,6 +5,8 @@ import { Button, FloatingLabel, Form } from "react-bootstrap";
 import { Modal } from "react-bootstrap";
 import {NavLink} from 'react-router-dom';
 
+import {Col } from "react-bootstrap";
+
 
 const AppRoomInfo = () =>{
   const [Data, setData] = useState([]);//для гет запиту 
@@ -114,6 +116,20 @@ const AppRoomInfo = () =>{
   useEffect(()=>{
     GetRoomInfoData();
   },[])
+
+
+  const [validated, setValidated] = useState(false);
+
+  const handleSubmit1 = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    setValidated(true);
+  };
+
 
   console.log(Data);
     return (
@@ -251,46 +267,113 @@ const AppRoomInfo = () =>{
                     </Modal.Header>
                     <Modal.Body>
                         <div>
-                        
-                            <div className='form-group'>
-                                <input type="text" className='form-control' onChange={(e)=> setstudName(e.target.value)} placeholder="Введіть ім'я студента"  />
-                            </div>
-                            <div className='form-group mt-3'>
-                                <input type="text" className='form-control' onChange={(e)=> setnumRoom(e.target.value)} placeholder="Введіть номер кімнати"  />
-                            </div>
-                            <div className='form-group mt-3'>
-                                <input type="text" className='form-control' onChange={(e)=> settypeRoom(e.target.value)} placeholder="Введіть тип кімнати"   />
-                            </div>
-                            <div className='form-group mt-3'>
-                                <input type="text" className='form-control' onChange={(e)=> setfaculty(e.target.value)} placeholder="Введіть факультет"  />
-                            </div>
-                            <div className='form-group mt-3'>
-                                <input type="text" className='form-control' onChange={(e)=> setcourseNum(e.target.value)} placeholder="Введіть курс студента"  />
-                            </div>
-                            <div className='form-group mt-3'>
-                            <FloatingLabel controlId="floatingSelect" onChange={(e)=> setroomSex(e.target.value)} label="Оберіть стать">
-                            <Form.Select aria-label="Floating label select example">
-                                <option></option>
-                                <option value="Чоловіча">Чоловіча</option>
-                                <option value="Жіноча">Жіноча</option>
-                            </Form.Select>
-                            </FloatingLabel>
-                               
-                            </div>
-                            <div className='form-group mt-3'>
-                                <input type="text" className='form-control' onChange={(e)=> setdateOfSettlement(e.target.value)} placeholder="Введіть дату заселення"   />
-                            </div>
-                            <div className='form-group mt-3'>
-                                <input type="text" className='form-control' onChange={(e)=> setdateOfDeparture(e.target.value)} placeholder="Введіть дату виселення"  />
-                            </div>
-                            <div className='form-group mt-3'>
-                                <input type="text" className='form-control' onChange={(e)=> setearlyDepartureDate(e.target.value)} placeholder=" Введіть дату дострокового виселнення"  />
-                            </div>
-                            <div className='form-group mt-3'>
-                                <input type="text" className='form-control' onChange={(e)=> setroomId(e.target.value)} placeholder="Введіть Ід кімнати"  />
-                            </div>
-                            <Button type='submit' className='btn btn-success mt-4'onClick={()=>{handleSubmit()}}> Заселити студента</Button>
+                            <Form noValidate validated={validated} onSubmit={handleSubmit1}>
+                                <Form.Group as={Col}  controlId="validationCustom01">
+                                    <Form.Control
+                                        required
+                                        type="text"
+                                        className='form-control  mt-3'
+                                        onChange={(e)=> setstudName(e.target.value)}
+                                        placeholder="Введіть ім'я студента"
+                                    />
+                                </Form.Group>
+                                
+                                <Form.Group as={Col}  mt-3 controlId="validationCustom02">
+                                <Form.Control
+                                    required
+                                    type="number"
+                                    className='form-control  mt-3'
+                                    onChange={(e)=> setnumRoom(e.target.value)}
+                                    placeholder="Введіть номер кімнати"
+                                />
+                                </Form.Group>
 
+                                <Form.Group as={Col}  controlId="validationCustom01">
+                                    <Form.Control
+                                        required
+                                        type="text"
+                                        className='form-control  mt-3'
+                                        onChange={(e)=> settypeRoom(e.target.value)}
+                                        placeholder="Введіть тип кімнати"
+                                    />
+                                </Form.Group>
+                                
+                                <Form.Group as={Col}  mt-3 controlId="validationCustom02">
+                                <Form.Control
+                                    required
+                                    type="text"
+                                    className='form-control  mt-3'
+                                    onChange={(e)=> setfaculty(e.target.value)}
+                                    placeholder="Введіть факультет студента"
+                                />
+                                </Form.Group>
+
+                                <Form.Group as={Col}  controlId="validationCustom01">
+                                    <Form.Control
+                                        required
+                                        type="number"
+                                        className='form-control  mt-3'
+                                        onChange={(e)=> setcourseNum(e.target.value)}
+                                        placeholder="Введіть курс студента"
+                                    />
+                                </Form.Group>
+
+                                <FloatingLabel as={Col}  mt-3 controlId="validationCustom02"
+                                    className=' mt-3'
+                                    required
+                                    type="text"
+                                    onChange={(e)=> setroomSex(e.target.value)}
+                                    label="Оберіть стать"
+                                    >
+                                    <Form.Select aria-label="Floating label select example">
+                                        <option></option>
+                                        <option value="Чоловіча">Чоловіча</option>
+                                        <option value="Жіноча">Жіноча</option>
+                                    </Form.Select>
+                                </FloatingLabel>                          
+
+                                <Form.Group as={Col}  controlId="validationCustom01">
+                                    <Form.Control
+                                        required
+                                        type="date"
+                                        className='form-control  mt-3'
+                                        onChange={(e)=> setdateOfSettlement(e.target.value + "T11:17:37.124Z")}
+                                        placeholder="Введіть дату заселення"
+                                    />
+                                </Form.Group>
+                                
+                                <Form.Group as={Col}  mt-3 controlId="validationCustom02">
+                                <Form.Control
+                                    required
+                                    type="date"
+                                    className='form-control  mt-3'
+                                    onChange={(e)=> setdateOfDeparture(e.target.value + "T11:17:37.124Z")}
+                                    placeholder="Введіть дату виселення"
+                                />
+                                </Form.Group>
+
+                                <Form.Group as={Col}  mt-3 controlId="validationCustom02">
+                                <Form.Control
+                                    required
+                                    type="date"
+                                    className='form-control  mt-3'
+                                    onChange={(e)=> setearlyDepartureDate(e.target.value + "T11:17:37.124Z")}
+                                    placeholder="Дострокова дата виселення"
+                                />
+                                </Form.Group>
+
+                                <Form.Group as={Col}  mt-3 controlId="validationCustom02">
+                                <Form.Control
+                                    required
+                                    type="number"
+                                    className='form-control  mt-3'
+                                    onChange={(e)=> setroomId(e.target.value)}
+                                    placeholder="Введіть Ід кімнати"
+                                />
+                                </Form.Group>
+
+                                <Button type="submit" className='btn btn-success mt-4'onClick={()=>{handleSubmit()}}> Заселити студента</Button>
+                            </Form>
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
@@ -313,49 +396,133 @@ const AppRoomInfo = () =>{
                     </Modal.Header>
                     <Modal.Body>
                         <div>
-                        <div className='form-group'>
-                                <label>Ім'я студента</label>
-                                <input type="text" className='form-control' onChange={(e)=> setstudName(e.target.value)} placeholder="Введіть ім'я студента" defaultValue={RowData.studName} />
-                            </div>
-                            <div className='form-group mt-3'>
-                                <label>Номер кімнати</label>
-                                <input type="text" className='form-control' onChange={(e)=> setnumRoom(e.target.value)} placeholder="Введіть номер кімнати"  defaultValue={RowData.numRoom} />
-                            </div>
-                            <div className='form-group mt-3'>
-                                <label>Тип кімнати</label> 
-                                <input type="text" className='form-control' onChange={(e)=> settypeRoom(e.target.value)} placeholder="Введіть тип кімнати"  defaultValue={RowData.typeRoom} />
-                            </div>
-                            <div className='form-group mt-3'>
-                                <label>Факультет</label>
-                                <input type="text" className='form-control' onChange={(e)=> setfaculty(e.target.value)} placeholder="Введіть факультет" defaultValue={RowData.faculty}  />
-                            </div>
-                            <div className='form-group mt-3'>
-                                <label>Номер курсу</label>
-                                <input type="text" className='form-control' onChange={(e)=> setcourseNum(e.target.value)} placeholder="Введіть курс студента" defaultValue={RowData.courseNum} />
-                            </div>
-                            <div className='form-group mt-3'>
-                                <label>Стать кімнати</label>
-                                <input type="text" className='form-control' onChange={(e)=> setroomSex(e.target.value)} placeholder="Хто проживає в кімнаті " defaultValue={RowData.roomSex} />
-                            </div>
-                            <div className='form-group mt-3'>
-                                <label>Дата заселення</label>
-                                <input type="text" className='form-control' onChange={(e)=> setdateOfSettlement(e.target.value)} placeholder="Введіть дату заселення"  defaultValue={RowData.dateOfSettlement} />
-                            </div>
-                            <div className='form-group mt-3'>
-                                <label>Дата виселення</label>
-                                <input type="text" className='form-control' onChange={(e)=> setdateOfDeparture(e.target.value)} placeholder="Введіть дату виселення" defaultValue={RowData.dateOfDepartur} />
-                            </div>
-                            <div className='form-group mt-3'>
-                                <label>Дострокова дата виселення</label>
-                                <input type="text" className='form-control' onChange={(e)=> setearlyDepartureDate(e.target.value)} placeholder=" Введіть дату дострокового виселнення" defaultValue={RowData.earlyDepartureDate} />
-                            </div>
-                            <div className='form-group mt-3'>
-                                <label>Ід кімнати</label>
-                                <input type="text" className='form-control' onChange={(e)=> setroomId(e.target.value)} placeholder="Введіть Ід кімнати" defaultValue={RowData.roomId} />
-                            </div>
+                            <Form noValidate validated={validated} onSubmit={handleSubmit1}>
+                                <Form.Group as={Col}  controlId="validationCustom01">
+                                <Form.Label>Ім'я студента</Form.Label>
+                                    <Form.Control
+                                        required
+                                        type="text"
+                                        className='form-control  '
+                                        onChange={(e)=> setstudName(e.target.value)}
+                                        defaultValue={RowData.studName}
+                                        placeholder="Введіть ім'я студента"
+                                    />
+                                </Form.Group>
+                                
+                                <Form.Group as={Col}  mt-3 controlId="validationCustom02">
+                                <Form.Label>Номер кімнати</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="number"
+                                    className='form-control '
+                                    onChange={(e)=> setnumRoom(e.target.value)}
+                                    defaultValue={RowData.numRoom}
+                                    placeholder="Введіть номер кімнати"
+                                />
+                                </Form.Group>
 
-                            <Button type='submit' className='btn btn-warning mt-4'onClick={()=>{handleEdit()}}> Редагувати</Button>
+                                <Form.Group as={Col}  controlId="validationCustom01">
+                                <Form.Label>Тип кімнати</Form.Label>
+                                    <Form.Control
+                                        required
+                                        type="text"
+                                        className='form-control  '
+                                        onChange={(e)=> settypeRoom(e.target.value)}
+                                        defaultValue={RowData.typeRoom}
+                                        placeholder="Введіть тип кімнати"
+                                    />
+                                </Form.Group>
+                                
+                                <Form.Group as={Col}  mt-3 controlId="validationCustom02">
+                                <Form.Label>Факультет студента</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="text"
+                                    className='form-control  '
+                                    onChange={(e)=> setfaculty(e.target.value)}
+                                    defaultValue={RowData.faculty}
+                                    placeholder="Введіть факультет студента"
+                                />
+                                </Form.Group>
 
+                                <Form.Group as={Col}  controlId="validationCustom01">
+                                <Form.Label>Курс студента</Form.Label>
+                                    <Form.Control
+                                        required
+                                        type="number"
+                                        className='form-control  '
+                                        onChange={(e)=> setcourseNum(e.target.value)}
+                                        defaultValue={RowData.courseNum}
+                                        placeholder="Введіть курс студента"
+                                    />
+                                </Form.Group>
+
+                                <Form.Label>Оберіть стать</Form.Label>
+                                <FloatingLabel as={Col}  mt-3 controlId="validationCustom02"
+                                    
+                                    required
+                                    type="text"
+                                    onChange={(e)=> setroomSex(e.target.value)}
+                                    defaultValue={RowData.roomSex}
+                                    label="Оберіть стать"
+                                    >
+                                    <Form.Select aria-label="Floating label select example">
+                                        <option></option>
+                                        <option value="Чоловіча">Чоловіча</option>
+                                        <option value="Жіноча">Жіноча</option>
+                                    </Form.Select>
+                                </FloatingLabel>                          
+
+                                <Form.Group as={Col}  controlId="validationCustom01">
+                                <Form.Label>Дата заселення</Form.Label>
+                                    <Form.Control
+                                        required
+                                        type="date"
+                                        className='form-control '
+                                        onChange={(e)=> setdateOfSettlement(e.target.value + "T11:17:37.124Z")}
+                                        defaultValue={RowData.dateOfSettlement}
+                                        placeholder="Введіть дату заселення"
+                                    />
+                                </Form.Group>
+                                
+                                <Form.Group as={Col}  mt-3 controlId="validationCustom02">
+                                <Form.Label>Дата виселення</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="date"
+                                    className='form-control  '
+                                    onChange={(e)=> setdateOfDeparture(e.target.value + "T11:17:37.124Z")}
+                                    defaultValue={RowData.dateOfDepartur}
+                                    placeholder="Введіть дату виселення"
+                                />
+                                </Form.Group>
+
+                                <Form.Group as={Col}  mt-3 controlId="validationCustom02">
+                                <Form.Label>Дострокова дата виселення</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="date"
+                                    className='form-control  '
+                                    onChange={(e)=> setearlyDepartureDate(e.target.value + "T11:17:37.124Z")}
+                                    defaultValue={RowData.earlyDepartureDate}
+                                    placeholder="Дострокова дата виселення"
+                                />
+                                </Form.Group>
+
+                                <Form.Group as={Col}  mt-3 controlId="validationCustom02">
+                                <Form.Label>Ід кімнати</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="number"
+                                    className='form-control'
+                                    onChange={(e)=> setroomId(e.target.value)}
+                                    defaultValue={RowData.roomId}
+                                    placeholder="Введіть Ід кімнати"
+                                />
+                                </Form.Group>
+
+                                <Button type="submit" className='btn btn-warning mt-4'onClick={()=>{handleEdit()}}> Редагувати</Button>
+                            </Form>
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
