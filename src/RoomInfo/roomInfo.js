@@ -332,31 +332,34 @@ const AppRoomInfo = () =>{
                                     </Form.Select>
                                 </FloatingLabel>                          
 
-                                <Form.Group as={Col}  controlId="validationCustom01">
+                                <Form.Group as={Col} className='mt-3' controlId="validationCustom01">
+                                <Form.Label>Дата заселення</Form.Label>
                                     <Form.Control
                                         required
                                         type="date"
-                                        className='form-control  mt-3'
+                                        className='form-control'
                                         onChange={(e)=> setdateOfSettlement(e.target.value + "T11:17:37.124Z")}
                                         placeholder="Введіть дату заселення"
                                     />
                                 </Form.Group>
                                 
-                                <Form.Group as={Col}  mt-3 controlId="validationCustom02">
+                                <Form.Group as={Col}  className='mt-3' controlId="validationCustom02">
+                                <Form.Label>Дата виселення</Form.Label>
                                 <Form.Control
                                     required
                                     type="date"
-                                    className='form-control  mt-3'
+                                    className='form-control'
                                     onChange={(e)=> setdateOfDeparture(e.target.value + "T11:17:37.124Z")}
                                     placeholder="Введіть дату виселення"
                                 />
                                 </Form.Group>
 
-                                <Form.Group as={Col}  mt-3 controlId="validationCustom02">
+                                <Form.Group as={Col}   className='mt-3' controlId="validationCustom02">
+                                <Form.Label>Дата дострокового виселення</Form.Label>
                                 <Form.Control
                                     required
                                     type="date"
-                                    className='form-control  mt-3'
+                                    className='form-control'
                                     onChange={(e)=> setearlyDepartureDate(e.target.value + "T11:17:37.124Z")}
                                     placeholder="Дострокова дата виселення"
                                 />
@@ -467,7 +470,7 @@ const AppRoomInfo = () =>{
                                     label="Оберіть стать"
                                     >
                                     <Form.Select aria-label="Floating label select example">
-                                        <option></option>
+                                        <option>{RowData.roomSex}</option>
                                         <option value="Чоловіча">Чоловіча</option>
                                         <option value="Жіноча">Жіноча</option>
                                     </Form.Select>

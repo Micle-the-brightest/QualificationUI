@@ -321,25 +321,45 @@ const AppRoomList = () =>{
                                 </Form.Select>
                             </FloatingLabel>                          
 
-                            <Form.Group as={Col}  controlId="validationCustom01">
-                                <Form.Control
-                                    required
-                                    type="number"
-                                    className='form-control  mt-3'
-                                    onChange={(e)=> setdormitoryId(e.target.value)}
-                                    placeholder="Введіть Ід гуртожитку"
-                                />
-                            </Form.Group>
-                            
-                            <Form.Group as={Col}  mt-3 controlId="validationCustom02">
-                            <Form.Control
+
+                            <FloatingLabel as={Col}  mt-3 controlId="validationCustom02"
+                                className=' mt-3'
                                 required
-                                type="number"
-                                className='form-control  mt-3'
+                                type="text"
+                                onChange={(e)=> setdormitoryId(e.target.value)}
+                                label="Оберіть гуртожиток"
+                                >
+                                <Form.Select aria-label="Floating label select example">
+                                    <option></option>
+                                    <option value="1">Академічний дім</option>
+                                    <option value="2">Гуртожиток № 9</option>
+                                    <option value="3">Гуртожиток № 2</option>
+                                    <option value="4">Гуртожиток № 7</option>
+                                    <option value="5">Гуртожиток № 8</option>
+                                    <option value="6">Гуртожиток № 10</option>
+                                    <option value="8">Гуртожиток № 3</option>
+                                    <option value="9">Гуртожиток № 5</option>
+                                    <option value="10">Гуртожиток № 6</option>
+                                    <option value="11">Гуртожиток № 4</option>
+                                </Form.Select>
+                            </FloatingLabel>
+
+                            <FloatingLabel as={Col}  mt-3 controlId="validationCustom02"
+                                className=' mt-3'
+                                required
+                                type="text"
                                 onChange={(e)=> settypeId(e.target.value)}
-                                placeholder="Введіть Ід типу кімнати"
-                            />
-                            </Form.Group>
+                                label="Оберіть тип"
+                                >
+                                <Form.Select aria-label="Floating label select example">
+                                    <option></option>
+                                    <option value="1">Стандарт</option>
+                                    <option value="2">З покращеними умовами(Душова, туалет)</option>
+                                    <option value="3">З покращеними умовами(Туалет)</option>
+                                </Form.Select>
+                            </FloatingLabel>
+                            
+                           
                             <Button type="submit" className='btn btn-success mt-4' onClick={()=>{handleSubmit()}} >Додати кімнату</Button>
                         </Form>
                   </div>
@@ -427,43 +447,61 @@ const AppRoomList = () =>{
                             </Form.Group>
 
                             <Form.Label>Оберіть стать</Form.Label>
-                            <FloatingLabel as={Col}  mt-3 controlId="validationCustom02"
+                            <FloatingLabel as={Col} controlId="validationCustom02"
                                 required
                                 type="text"
                                 onChange={(e)=> setroomSex(e.target.value)} 
                                 defaultValue={RowData.roomSex}
-                                label="Оберіть стать"
+                                
                                 >
                                 <Form.Select aria-label="Floating label select example">
-                                    <option></option>
+                                    <option>{RowData.roomSex}</option>
                                     <option value="Чоловіча">Чоловіча</option>
                                     <option value="Жіноча">Жіноча</option>
                                 </Form.Select>
                             </FloatingLabel>                          
 
-                            <Form.Group as={Col}  controlId="validationCustom01">
-                            <Form.Label>Ід гуртожитку</Form.Label>
-                                <Form.Control
-                                    required
-                                    type="number"
-                                    className='form-control '
-                                    onChange={(e)=> setdormitoryId(e.target.value)}
-                                    defaultValue={RowData.dormitoryId}
-                                    placeholder="Введіть Ід гуртожитку"
-                                />
-                            </Form.Group>
-                            
-                            <Form.Group as={Col}  mt-3 controlId="validationCustom02">
-                            <Form.Label>Ід типу кімнати</Form.Label>
-                            <Form.Control
+
+                            <FloatingLabel as={Col}  mt-3 controlId="validationCustom02"
+                                className=' mt-3'
                                 required
-                                type="number"
-                                className='form-control'
+                                type="text"
+                                onChange={(e)=> setdormitoryId(e.target.value)}
+                                defaultValue={RowData.dormitoryId}
+                                label="Оберіть гуртожиток"
+                                >
+                                <Form.Select aria-label="Floating label select example">
+                                    <option>{RowData.dormitoryId}</option>
+                                    <option value="1">Академічний дім</option>
+                                    <option value="2">Гуртожиток № 9</option>
+                                    <option value="3">Гуртожиток № 2</option>
+                                    <option value="4">Гуртожиток № 7</option>
+                                    <option value="5">Гуртожиток № 8</option>
+                                    <option value="6">Гуртожиток № 10</option>
+                                    <option value="8">Гуртожиток № 3</option>
+                                    <option value="9">Гуртожиток № 5</option>
+                                    <option value="10">Гуртожиток № 6</option>
+                                    <option value="11">Гуртожиток № 4</option>
+                                </Form.Select>
+                            </FloatingLabel>
+
+                            <FloatingLabel as={Col}  mt-3 controlId="validationCustom02"
+                                className=' mt-3'
+                                required
+                                type="text"
                                 onChange={(e)=> settypeId(e.target.value)}
                                 defaultValue={RowData.typeId}
-                                placeholder="Введіть Ід типу кімнати"
-                            />
-                            </Form.Group>
+                                label="Оберіть тип"
+                                >
+                                <Form.Select aria-label="Floating label select example">
+                                    <option>{RowData.typeId}</option>
+                                    <option value="1">Стандарт</option>
+                                    <option value="2">З покращеними умовами(Душова, туалет)</option>
+                                    <option value="3">З покращеними умовами(Туалет)</option>
+                                </Form.Select>
+                            </FloatingLabel>
+
+                            
                             <Button type="submit" className='btn btn-warning mt-4'onClick={()=>{handleEdit()}}>Редагувати</Button>
                         </Form>
                      
